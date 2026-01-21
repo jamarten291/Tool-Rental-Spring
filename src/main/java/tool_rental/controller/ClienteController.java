@@ -3,6 +3,8 @@ package tool_rental.controller;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import tool_rental.dto.ClienteDTO;
+import tool_rental.mapper.EntityDtoMapper;
 import tool_rental.model.Cliente;
 import tool_rental.service.ClienteService;
 
@@ -17,17 +19,30 @@ public class ClienteController {
     public ClienteController(ClienteService clienteService) { this.clienteService = clienteService; }
 
     @GetMapping
-    public List<Cliente> listar() { return clienteService.listarTodos(); }
+    public List<ClienteDTO> listar() {
+        return EntityDtoMapper.toClienteDtoList(clienteService.listarTodos());
+    }
 
     @GetMapping("/{id}")
-    public Cliente obtener(@PathVariable Long id) { return clienteService.buscarPorId(id); }
+    public ClienteDTO obtener(@PathVariable Long id) {
+        Cliente c = clienteService.buscarPorId(id);
+        return EntityDtoMapper.toDto(c);
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Cliente crear(@Valid @RequestBody Cliente cliente) { return clienteService.crear(cliente); }
+    public ClienteDTO crear(@Valid @RequestBody ClienteDTO clienteDto) {
+        Cliente entity = EntityDtoMapper.toEntity(clienteDto);
+        Cliente creado = clienteService.crear(entity);
+        return EntityDtoMapper.toDto(creado);
+    }
 
     @PutMapping("/{id}")
-    public Cliente actualizar(@PathVariable Long id, @Valid @RequestBody Cliente cliente) { return clienteService.actualizar(id, cliente); }
+    public ClienteDTO actualizar(@PathVariable Long id, @Valid @RequestBody ClienteDTO clienteDto) {
+        Cliente entity = EntityDtoMapper.toEntity(clienteDto);
+        Cliente actualizado = clienteService.actualizar(id, entity);
+        return EntityDtoMapper.toDto(actualizado);
+    }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

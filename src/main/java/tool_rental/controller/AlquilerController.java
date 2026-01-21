@@ -3,6 +3,9 @@ package tool_rental.controller;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import tool_rental.dto.AlquilerCreateDTO;
+import tool_rental.dto.AlquilerResponseDTO;
+import tool_rental.mapper.EntityDtoMapper;
 import tool_rental.model.Alquiler;
 import tool_rental.service.AlquilerService;
 
@@ -17,21 +20,33 @@ public class AlquilerController {
     public AlquilerController(AlquilerService alquilerService) { this.alquilerService = alquilerService; }
 
     @GetMapping
-    public List<Alquiler> listar() { return alquilerService.listarTodos(); }
+    public List<AlquilerResponseDTO> listar() {
+        return EntityDtoMapper.toAlquilerResponseList(alquilerService.listarTodos());
+    }
 
     @GetMapping("/{id}")
-    public Alquiler obtener(@PathVariable Long id) { return alquilerService.buscarPorId(id); }
+    public AlquilerResponseDTO obtener(@PathVariable Long id) {
+        Alquiler a = alquilerService.buscarPorId(id);
+        return EntityDtoMapper.toDto(a);
+    }
 
     @GetMapping("/cliente/{clienteId}")
-    public List<Alquiler> listarPorCliente(@PathVariable Long clienteId) { return alquilerService.listarPorCliente(clienteId); }
+    public List<AlquilerResponseDTO> listarPorCliente(@PathVariable Long clienteId) {
+        return EntityDtoMapper.toAlquilerResponseList(alquilerService.listarPorCliente(clienteId));
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Alquiler crear(@Valid @RequestBody Alquiler alquiler) { return alquilerService.crear(alquiler); }
+    public AlquilerResponseDTO crear(@Valid @RequestBody AlquilerCreateDTO createDto) {
+        Alquiler entidad = EntityDtoMapper.toEntityFromCreateDto(createDto);
+        Alquiler creado = alquilerService.crear(entidad);
+        return EntityDtoMapper.toDto(creado);
+    }
 
     @PutMapping("/{id}/estado")
-    public Alquiler actualizarEstado(@PathVariable Long id, @RequestParam String estado) {
-        return alquilerService.actualizarEstado(id, estado);
+    public AlquilerResponseDTO actualizarEstado(@PathVariable Long id, @RequestParam String estado) {
+        Alquiler actualizado = alquilerService.actualizarEstado(id, estado);
+        return EntityDtoMapper.toDto(actualizado);
     }
 
     @PostMapping("/{id}/finalizar")
@@ -40,8 +55,9 @@ public class AlquilerController {
     }
 
     @PostMapping("/{id}/cancelar")
-    public Alquiler cancelar(@PathVariable Long id) {
+    public AlquilerResponseDTO cancelar(@PathVariable Long id) {
         alquilerService.cancelar(id);
-        return alquilerService.buscarPorId(id);
+        Alquiler actualizado = alquilerService.buscarPorId(id);
+        return EntityDtoMapper.toDto(actualizado);
     }
 }

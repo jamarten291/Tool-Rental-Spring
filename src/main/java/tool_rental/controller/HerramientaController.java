@@ -3,6 +3,8 @@ package tool_rental.controller;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import tool_rental.dto.HerramientaDTO;
+import tool_rental.mapper.EntityDtoMapper;
 import tool_rental.model.Herramienta;
 import tool_rental.service.HerramientaService;
 
@@ -17,17 +19,30 @@ public class HerramientaController {
     public HerramientaController(HerramientaService herramientaService) { this.herramientaService = herramientaService; }
 
     @GetMapping
-    public List<Herramienta> listar() { return herramientaService.listarTodos(); }
+    public List<HerramientaDTO> listar() {
+        return EntityDtoMapper.toHerramientaDtoList(herramientaService.listarTodos());
+    }
 
     @GetMapping("/{id}")
-    public Herramienta obtener(@PathVariable Long id) { return herramientaService.buscarPorId(id); }
+    public HerramientaDTO obtener(@PathVariable Long id) {
+        Herramienta h = herramientaService.buscarPorId(id);
+        return EntityDtoMapper.toDto(h);
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Herramienta crear(@Valid @RequestBody Herramienta herramienta) { return herramientaService.crear(herramienta); }
+    public HerramientaDTO crear(@Valid @RequestBody HerramientaDTO herramientaDto) {
+        Herramienta entity = EntityDtoMapper.toEntity(herramientaDto);
+        Herramienta creado = herramientaService.crear(entity);
+        return EntityDtoMapper.toDto(creado);
+    }
 
     @PutMapping("/{id}")
-    public Herramienta actualizar(@PathVariable Long id, @Valid @RequestBody Herramienta herramienta) { return herramientaService.actualizar(id, herramienta); }
+    public HerramientaDTO actualizar(@PathVariable Long id, @Valid @RequestBody HerramientaDTO herramientaDto) {
+        Herramienta entity = EntityDtoMapper.toEntity(herramientaDto);
+        Herramienta actualizado = herramientaService.actualizar(id, entity);
+        return EntityDtoMapper.toDto(actualizado);
+    }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

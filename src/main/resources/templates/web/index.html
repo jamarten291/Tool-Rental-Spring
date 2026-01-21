@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<section>
+    <h1>Panel de administración - Tool Rental</h1>
+
+    <h2>Clientes</h2>
+    <ul>
+        <li><a th:href="@{/web/clientes}">Listar clientes</a></li>
+        <li><a th:href="@{/web/clientes/nuevo}">Crear cliente</a></li>
+    </ul>
+
+    <h2>Herramientas</h2>
+    <ul>
+        <li><a th:href="@{/web/herramientas}">Listar herramientas</a></li>
+        <li><a th:href="@{/web/herramientas/nuevo}">Crear herramienta</a></li>
+    </ul>
+
+    <h2>Alquileres</h2>
+    <ul>
+        <li><a th:href="@{/web/alquileres}">Listar alquileres</a></li>
+        <li><a th:href="@{/web/alquileres/nuevo}">Crear alquiler</a></li>
+        <li><a th:href="@{/web/alquileres/disponibles}">Buscar disponibles por fechas</a></li>
+    </ul>
+
+    <h2>Acciones rápidas</h2>
+    <ul>
+        <li><a th:href="@{/web/alquileres}">Cancelar / Devolver desde la lista de alquileres</a></li>
+        <li>
+            <form th:action="@{/web/alquileres/coste}" method="get" style="display:inline-block; margin-top:0.5rem;">
+                <label>Calcular coste - herramientaId:
+                    <input type="number" name="herramientaId" min="1" required style="width:6rem" />
+                </label>
+                <label> Fecha inicio:
+                    <input type="date" name="fechaIni" required />
+                </label>
+                <label> Fecha fin:
+                    <input type="date" name="fechaFin" required />
+                </label>
+                <button type="submit">Calcular</button>
+            </form>
+        </li>
+    </ul>
+</section>
+</html>

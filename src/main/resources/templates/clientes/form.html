@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<section>
+  <h1 th:text="${clienteDto.id} != null ? 'Editar cliente' : 'Nuevo cliente'">Nuevo cliente</h1>
+  <form th:action="${clienteDto.id} != null ? @{'/web/clientes/' + ${clienteDto.id} + '/actualizar'} : @{/web/clientes/guardar}" th:object="${clienteDto}" method="post">
+    <div>
+      <label>Nombre</label>
+      <input type="text" th:field="*{nombre}" />
+      <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+    </div>
+    <div>
+      <label>Email</label>
+      <input type="email" th:field="*{email}" />
+      <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+    </div>
+    <div>
+      <label>Teléfono</label>
+      <input type="text" th:field="*{telefono}" />
+    </div>
+    <button type="submit">Guardar</button>
+  </form>
+</section>
+</html>

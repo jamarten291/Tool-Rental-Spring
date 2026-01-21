@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<section>
+  <h1>Alquileres</h1>
+  <a th:href="@{/web/alquileres/nuevo}">Crear nuevo</a>
+  <table>
+    <thead><tr><th>ID</th><th>Cliente</th><th>Herramienta</th><th>Estado</th><th>Fechas</th><th>Monto</th><th>Acciones</th></tr></thead>
+    <tbody>
+    <tr th:each="a : ${alquileres}">
+      <td th:text="${a.id}">1</td>
+      <td th:text="${a.clienteId}">1</td>
+      <td th:text="${a.herramientaId}">2</td>
+      <td th:text="${a.estado}">PENDIENTE</td>
+      <td><span th:text="${a.fechaInicio}"></span> - <span th:text="${a.fechaFin}"></span></td>
+      <td th:text="${a.monto}">0.0</td>
+      <td>
+        <a th:href="@{'/web/alquileres/' + ${a.id}}">Ver</a>
+        <form th:action="@{'/web/alquileres/' + ${a.id} + '/cancelar'}" method="post" style="display:inline">
+          <button type="submit">Cancelar</button>
+        </form>
+        <form th:action="@{'/web/alquileres/' + ${a.id} + '/finalizar'}" method="post" style="display:inline">
+          <button type="submit">Devolver/Finalizar</button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+</html>

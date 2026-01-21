@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<section>
+  <h1>Herramientas disponibles</h1>
+  <p>Desde: <span th:text="${fechaIni}"></span> Hasta: <span th:text="${fechaFin}"></span></p>
+  <table>
+    <thead><tr><th>ID</th><th>Nombre</th><th>Categoría</th><th>Precio/día</th><th>Stock</th><th>Acción</th></tr></thead>
+    <tbody>
+    <tr th:each="h : ${disponibles}">
+      <td th:text="${h.id}">1</td>
+      <td th:text="${h.nombre}">Nombre</td>
+      <td th:text="${h.categoria}">Cat</td>
+      <td th:text="${h.precioDia}">10</td>
+      <td th:text="${h.stock}">2</td>
+      <td><a th:href="@{/web/alquileres/nuevo}">Reservar</a></td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<section>
+    <h1>Buscar herramientas disponibles</h1>
+    <form th:action="@{/web/alquileres/disponibles}" method="post">
+        <div>
+            <label>Fecha inicio</label>
+            <input type="date" name="fechaIni" required />
+        </div>
+        <div>
+            <label>Fecha fin</label>
+            <input type="date" name="fechaFin" required />
+        </div>
+        <button type="submit">Buscar</button>
+    </form>
+</section>
+</html>

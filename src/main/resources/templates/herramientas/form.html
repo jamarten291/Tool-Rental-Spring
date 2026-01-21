@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<section>
+  <h1 th:text="${herramientaDto.id} != null ? 'Editar herramienta' : 'Nueva herramienta'">Nueva herramienta</h1>
+  <form th:action="${herramientaDto.id} != null ? @{'/web/herramientas/' + ${herramientaDto.id} + '/actualizar'} : @{/web/herramientas/guardar}" th:object="${herramientaDto}" method="post">
+    <div>
+      <label>Nombre</label>
+      <input type="text" th:field="*{nombre}" />
+    </div>
+    <div>
+      <label>Categoría</label>
+      <input type="text" th:field="*{categoria}" />
+    </div>
+    <div>
+      <label>Precio por día</label>
+      <input type="number" step="0.01" th:field="*{precioDia}" />
+    </div>
+    <div>
+      <label>Stock</label>
+      <input type="number" th:field="*{stock}" />
+    </div>
+    <button type="submit">Guardar</button>
+  </form>
+</section>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<nav>
+    <a th:href="@{/web/clientes}">Clientes</a> |
+    <a th:href="@{/web/herramientas}">Herramientas</a> |
+    <a th:href="@{/web/alquileres}">Alquileres</a> |
+    <a th:href="@{/web/alquileres/nuevo}">Crear alquiler</a> |
+    <a th:href="@{/web/alquileres/disponibles}">Buscar disponibles</a> |
+    <a th:href="@{/web/alquileres/informes/ingresos}">Ingresos</a> |
+    <a th:href="@{/web/alquileres/informes/stock-bajo}">Stock bajo</a>
+</nav>
+
+<div class="container">
+    <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+    <!-- Inserta aquí el contenido de la vista que use este layout -->
+    <div th:insert="~{::body}"></div>
+</div>
+
+</body>
+</html>

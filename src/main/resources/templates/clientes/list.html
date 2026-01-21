@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<section>
+  <h1>Clientes</h1>
+  <a th:href="@{/web/clientes/nuevo}">Nuevo cliente</a>
+  <table>
+    <thead><tr><th>ID</th><th>Nombre</th><th>Email</th><th>Teléfono</th><th>Acciones</th></tr></thead>
+    <tbody>
+    <tr th:each="c : ${clientes}">
+      <td th:text="${c.id}">1</td>
+      <td th:text="${c.nombre}">Nombre</td>
+      <td th:text="${c.email}">email</td>
+      <td th:text="${c.telefono}">tel</td>
+      <td>
+        <a th:href="@{'/web/clientes/' + ${c.id} + '/editar'}">Editar</a>
+        <form th:action="@{'/web/clientes/' + ${c.id} + '/eliminar'}" method="post" style="display:inline">
+          <button type="submit">Eliminar</button>
+        </form>
+        <a th:href="@{'/web/alquileres/cliente/' + ${c.id}}">Ver alquileres</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+</html>

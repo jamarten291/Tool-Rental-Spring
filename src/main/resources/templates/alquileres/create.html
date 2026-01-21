@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<section>
+  <h1>Crear Alquiler</h1>
+  <form th:action="@{/web/alquileres/guardar}" th:object="${alquilerCreateDto}" method="post">
+    <div>
+      <label>Cliente</label>
+      <select th:field="*{clienteId}">
+        <option th:each="c : ${clientes}" th:value="${c.id}" th:text="${c.nombre}">Cliente</option>
+      </select>
+    </div>
+    <div>
+      <label>Herramienta</label>
+      <select th:field="*{herramientaId}">
+        <option th:each="h : ${herramientas}" th:value="${h.id}" th:text="${h.nombre}">Herramienta</option>
+      </select>
+    </div>
+    <div>
+      <label>Fecha inicio</label>
+      <input type="date" th:field="*{fechaInicio}" />
+    </div>
+    <div>
+      <label>Fecha fin</label>
+      <input type="date" th:field="*{fechaFin}" />
+    </div>
+    <button type="submit">Crear</button>
+  </form>
+</section>
+</html>

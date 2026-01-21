@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<section>
+  <h1>Coste del alquiler</h1>
+  <p>Herramienta: <span th:text="${herramienta.nombre}">Nombre</span></p>
+  <p>Desde: <span th:text="${fechaIni}"></span> Hasta: <span th:text="${fechaFin}"></span></p>
+  <p>Días: <span th:text="${dias}">0</span></p>
+  <p>Coste total: <strong th:text="${coste}">0.0</strong></p>
+  <a th:href="@{/web/alquileres/nuevo}">Crear alquiler</a>
+</section>
+</html>

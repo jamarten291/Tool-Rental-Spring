@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<section>
+  <h1>Detalle del alquiler</h1>
+  <p>ID: <span th:text="${alquiler.id}"></span></p>
+  <p>Cliente ID: <span th:text="${alquiler.clienteId}"></span></p>
+  <p>Herramienta ID: <span th:text="${alquiler.herramientaId}"></span></p>
+  <p>Estado: <span th:text="${alquiler.estado}"></span></p>
+  <p>Fechas: <span th:text="${alquiler.fechaInicio}"></span> - <span th:text="${alquiler.fechaFin}"></span></p>
+  <p>Monto: <span th:text="${alquiler.monto}"></span></p>
+  <p>Monto devuelto: <span th:text="${alquiler.montoDevuelto}"></span></p>
+</section>
+</html>

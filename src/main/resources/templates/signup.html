@@ -10,11 +10,15 @@
 <form th:action="@{/signup}" method="post">
     <div>
         <label>Usuario</label>
-        <input type="text" name="username" required />
+        <label>
+            <input type="text" name="username" required />
+        </label>
     </div>
     <div>
         <label>Contraseña</label>
-        <input type="password" name="password" required />
+        <label>
+            <input type="password" name="password" required />
+        </label>
     </div>
     <button type="submit">Crear</button>
 </form>

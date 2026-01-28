@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Signup</title>
+</head>
+<body>
+<h2>Crear usuario</h2>
+<p th:if="${param.error == 'exists'}">Ese usuario ya existe.</p>
+<form th:action="@{/signup}" method="post">
+    <div>
+        <label>Usuario</label>
+        <input type="text" name="username" required />
+    </div>
+    <div>
+        <label>Contraseña</label>
+        <input type="password" name="password" required />
+    </div>
+    <button type="submit">Crear</button>
+</form>
+<p><a th:href="@{/login}">Volver al login</a></p>
+</body>
+</html>

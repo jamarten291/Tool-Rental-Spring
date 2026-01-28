@@ -85,7 +85,6 @@ public class SecurityConfig {
                         .permitAll()
                 )
                 .logout(logout -> logout
-                        .logoutRequestMatcher(new AndRequestMatcher())
                         .logoutSuccessUrl("/login?logout")
                 )
                 .build();
